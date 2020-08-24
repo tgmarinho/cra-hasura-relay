@@ -1,0 +1,478 @@
+schema {
+  query: query_root
+  mutation: mutation_root
+  subscription: subscription_root
+}
+
+scalar date
+
+# expression to compare columns of type date. All fields are combined with logical 'AND'.
+input date_comparison_exp {
+  _eq: date
+  _gt: date
+  _gte: date
+  _in: [date!]
+  _is_null: Boolean
+  _lt: date
+  _lte: date
+  _neq: date
+  _nin: [date!]
+}
+
+# expression to compare columns of type Int. All fields are combined with logical 'AND'.
+input Int_comparison_exp {
+  _eq: Int
+  _gt: Int
+  _gte: Int
+  _in: [Int!]
+  _is_null: Boolean
+  _lt: Int
+  _lte: Int
+  _neq: Int
+  _nin: [Int!]
+}
+
+# columns and relationships of "members"
+type members {
+  birthday: date
+  email: String!
+  id: Int!
+  name: String!
+}
+
+# aggregated selection of "members"
+type members_aggregate {
+  aggregate: members_aggregate_fields
+  nodes: [members!]!
+}
+
+# aggregate fields of "members"
+type members_aggregate_fields {
+  avg: members_avg_fields
+  count(columns: [members_select_column!], distinct: Boolean): Int
+  max: members_max_fields
+  min: members_min_fields
+  stddev: members_stddev_fields
+  stddev_pop: members_stddev_pop_fields
+  stddev_samp: members_stddev_samp_fields
+  sum: members_sum_fields
+  var_pop: members_var_pop_fields
+  var_samp: members_var_samp_fields
+  variance: members_variance_fields
+}
+
+# order by aggregate values of table "members"
+input members_aggregate_order_by {
+  avg: members_avg_order_by
+  count: order_by
+  max: members_max_order_by
+  min: members_min_order_by
+  stddev: members_stddev_order_by
+  stddev_pop: members_stddev_pop_order_by
+  stddev_samp: members_stddev_samp_order_by
+  sum: members_sum_order_by
+  var_pop: members_var_pop_order_by
+  var_samp: members_var_samp_order_by
+  variance: members_variance_order_by
+}
+
+# input type for inserting array relation for remote table "members"
+input members_arr_rel_insert_input {
+  data: [members_insert_input!]!
+  on_conflict: members_on_conflict
+}
+
+# aggregate avg on columns
+type members_avg_fields {
+  id: Float
+}
+
+# order by avg() on columns of table "members"
+input members_avg_order_by {
+  id: order_by
+}
+
+# Boolean expression to filter rows from the table "members". All fields are combined with a logical 'AND'.
+input members_bool_exp {
+  _and: [members_bool_exp]
+  _not: members_bool_exp
+  _or: [members_bool_exp]
+  birthday: date_comparison_exp
+  email: String_comparison_exp
+  id: Int_comparison_exp
+  name: String_comparison_exp
+}
+
+# unique or primary key constraints on table "members"
+enum members_constraint {
+  # unique or primary key constraint
+  members_email_key
+
+  # unique or primary key constraint
+  members_pkey
+}
+
+# input type for incrementing integer column in table "members"
+input members_inc_input {
+  id: Int
+}
+
+# input type for inserting data into table "members"
+input members_insert_input {
+  birthday: date
+  email: String
+  id: Int
+  name: String
+}
+
+# aggregate max on columns
+type members_max_fields {
+  birthday: date
+  email: String
+  id: Int
+  name: String
+}
+
+# order by max() on columns of table "members"
+input members_max_order_by {
+  birthday: order_by
+  email: order_by
+  id: order_by
+  name: order_by
+}
+
+# aggregate min on columns
+type members_min_fields {
+  birthday: date
+  email: String
+  id: Int
+  name: String
+}
+
+# order by min() on columns of table "members"
+input members_min_order_by {
+  birthday: order_by
+  email: order_by
+  id: order_by
+  name: order_by
+}
+
+# response of any mutation on the table "members"
+type members_mutation_response {
+  # number of affected rows by the mutation
+  affected_rows: Int!
+
+  # data of the affected rows by the mutation
+  returning: [members!]!
+}
+
+# input type for inserting object relation for remote table "members"
+input members_obj_rel_insert_input {
+  data: members_insert_input!
+  on_conflict: members_on_conflict
+}
+
+# on conflict condition type for table "members"
+input members_on_conflict {
+  constraint: members_constraint!
+  update_columns: [members_update_column!]!
+  where: members_bool_exp
+}
+
+# ordering options when selecting data from "members"
+input members_order_by {
+  birthday: order_by
+  email: order_by
+  id: order_by
+  name: order_by
+}
+
+# primary key columns input for table: "members"
+input members_pk_columns_input {
+  id: Int!
+}
+
+# select columns of table "members"
+enum members_select_column {
+  # column name
+  birthday
+
+  # column name
+  email
+
+  # column name
+  id
+
+  # column name
+  name
+}
+
+# input type for updating data in table "members"
+input members_set_input {
+  birthday: date
+  email: String
+  id: Int
+  name: String
+}
+
+# aggregate stddev on columns
+type members_stddev_fields {
+  id: Float
+}
+
+# order by stddev() on columns of table "members"
+input members_stddev_order_by {
+  id: order_by
+}
+
+# aggregate stddev_pop on columns
+type members_stddev_pop_fields {
+  id: Float
+}
+
+# order by stddev_pop() on columns of table "members"
+input members_stddev_pop_order_by {
+  id: order_by
+}
+
+# aggregate stddev_samp on columns
+type members_stddev_samp_fields {
+  id: Float
+}
+
+# order by stddev_samp() on columns of table "members"
+input members_stddev_samp_order_by {
+  id: order_by
+}
+
+# aggregate sum on columns
+type members_sum_fields {
+  id: Int
+}
+
+# order by sum() on columns of table "members"
+input members_sum_order_by {
+  id: order_by
+}
+
+# update columns of table "members"
+enum members_update_column {
+  # column name
+  birthday
+
+  # column name
+  email
+
+  # column name
+  id
+
+  # column name
+  name
+}
+
+# aggregate var_pop on columns
+type members_var_pop_fields {
+  id: Float
+}
+
+# order by var_pop() on columns of table "members"
+input members_var_pop_order_by {
+  id: order_by
+}
+
+# aggregate var_samp on columns
+type members_var_samp_fields {
+  id: Float
+}
+
+# order by var_samp() on columns of table "members"
+input members_var_samp_order_by {
+  id: order_by
+}
+
+# aggregate variance on columns
+type members_variance_fields {
+  id: Float
+}
+
+# order by variance() on columns of table "members"
+input members_variance_order_by {
+  id: order_by
+}
+
+# mutation root
+type mutation_root {
+  # delete data from the table: "members"
+  delete_members(
+    # filter the rows which have to be deleted
+    where: members_bool_exp!
+  ): members_mutation_response
+
+  # delete single row from the table: "members"
+  delete_members_by_pk(id: Int!): members
+
+  # insert data into the table: "members"
+  insert_members(
+    # the rows to be inserted
+    objects: [members_insert_input!]!
+
+    # on conflict condition
+    on_conflict: members_on_conflict
+  ): members_mutation_response
+
+  # insert a single row into the table: "members"
+  insert_members_one(
+    # the row to be inserted
+    object: members_insert_input!
+
+    # on conflict condition
+    on_conflict: members_on_conflict
+  ): members
+
+  # update data of the table: "members"
+  update_members(
+    # increments the integer columns with given value of the filtered values
+    _inc: members_inc_input
+
+    # sets the columns of the filtered rows to the given values
+    _set: members_set_input
+
+    # filter the rows which have to be updated
+    where: members_bool_exp!
+  ): members_mutation_response
+
+  # update single row of the table: "members"
+  update_members_by_pk(
+    # increments the integer columns with given value of the filtered values
+    _inc: members_inc_input
+
+    # sets the columns of the filtered rows to the given values
+    _set: members_set_input
+    pk_columns: members_pk_columns_input!
+  ): members
+}
+
+# column ordering options
+enum order_by {
+  # in the ascending order, nulls last
+  asc
+
+  # in the ascending order, nulls first
+  asc_nulls_first
+
+  # in the ascending order, nulls last
+  asc_nulls_last
+
+  # in the descending order, nulls first
+  desc
+
+  # in the descending order, nulls first
+  desc_nulls_first
+
+  # in the descending order, nulls last
+  desc_nulls_last
+}
+
+# query root
+type query_root {
+  # fetch data from the table: "members"
+  members(
+    # distinct select on columns
+    distinct_on: [members_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [members_order_by!]
+
+    # filter the rows returned
+    where: members_bool_exp
+  ): [members!]!
+
+  # fetch aggregated fields from the table: "members"
+  members_aggregate(
+    # distinct select on columns
+    distinct_on: [members_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [members_order_by!]
+
+    # filter the rows returned
+    where: members_bool_exp
+  ): members_aggregate!
+
+  # fetch data from the table: "members" using primary key columns
+  members_by_pk(id: Int!): members
+}
+
+# expression to compare columns of type String. All fields are combined with logical 'AND'.
+input String_comparison_exp {
+  _eq: String
+  _gt: String
+  _gte: String
+  _ilike: String
+  _in: [String!]
+  _is_null: Boolean
+  _like: String
+  _lt: String
+  _lte: String
+  _neq: String
+  _nilike: String
+  _nin: [String!]
+  _nlike: String
+  _nsimilar: String
+  _similar: String
+}
+
+# subscription root
+type subscription_root {
+  # fetch data from the table: "members"
+  members(
+    # distinct select on columns
+    distinct_on: [members_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [members_order_by!]
+
+    # filter the rows returned
+    where: members_bool_exp
+  ): [members!]!
+
+  # fetch aggregated fields from the table: "members"
+  members_aggregate(
+    # distinct select on columns
+    distinct_on: [members_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [members_order_by!]
+
+    # filter the rows returned
+    where: members_bool_exp
+  ): members_aggregate!
+
+  # fetch data from the table: "members" using primary key columns
+  members_by_pk(id: Int!): members
+}
+
